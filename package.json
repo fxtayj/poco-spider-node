@@ -1,0 +1,19 @@
+{
+  "name": "poco-spider-node",
+  "version": "1.0.0",
+  "description": "a node spider program for grabbing images from poco.cn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tony-fang",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "iconv": "^2.3.0",
+    "iconv-lite": "^0.4.19",
+    "request": "^2.83.0",
+    "superagent": "^3.8.1"
+  }
+}
