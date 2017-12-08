@@ -9,7 +9,7 @@ function downImages(url,fileName,path){
             imgData += chunk;
         });
         res.on('end', function() {
-            fs.writeFile('./downImg/' + path + '/' + fileName, imgData, 'binary', function(err) {
+            fs.writeFile(path + '/' + fileName, imgData, 'binary', function(err) {
                 if (err) {
                     console.log('保存失败');
                     console.log(err);

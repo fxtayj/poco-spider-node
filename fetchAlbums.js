@@ -1,11 +1,9 @@
 const cheerio = require('cheerio');
 const http = require('http')
 const iconv = require('iconv-lite');
-const analyzeAlbum = require('./analyzeAlbum');
 
 //解析作品集页面，获取作品页面信息
-async function fetchWorks(url) {
-    url = url ? url : 'http://my.poco.cn/act/act_list.php?user_id=53393816&p=1';
+async function fetchAlbums(url) {
     try {
         await http.get(url, function (res) {
             var chunks = [];
@@ -15,7 +13,7 @@ async function fetchWorks(url) {
             });
 
             res.on('end', function () {
-                let works = [];
+                let albums = [];
                 let html = iconv.decode(Buffer.concat(chunks), 'gb2312');
                 let $ = cheerio.load(html, {
                     decodeEntities: false
@@ -23,13 +21,13 @@ async function fetchWorks(url) {
                 $('h2.title a').each(function (idx, element) {
                     var $element = $(element);
                     if (!$element.text() == '') {
-                        works.push({
-                            workName: $element.text(),
-                            workUrl: $element.attr('href')
+                        albums.push({
+                            albumName: $element.text(),
+                            albumUrl: $element.attr('href')
                         })
                     }
                 })
-                return works;
+                return albums;
             });
         });
     } catch (err) {
@@ -37,4 +35,4 @@ async function fetchWorks(url) {
     }
 }
 
-module.exports = fetchWorks;
+module.exports = fetchAlbums;
